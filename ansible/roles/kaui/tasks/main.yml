@@ -21,7 +21,7 @@
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     # If the file already exist, don't clobber it
-    force: false
+    force: no
   tags: kpm-install
 
 # Generate Kaui-specific Tomcat configuration files based on environment variables
@@ -78,12 +78,22 @@
     state: directory
     mode: '0755'
 
+- name: Check if ROOT.war exists
+  become: true
+  ansible.builtin.stat:
+    path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT.war"
+  register: root_war
+
+- name: Fail if ROOT.war missing
+  ansible.builtin.fail:
+    msg: "ROOT.war not found at expected location"
+  when: not root_war.stat.exists
+
 # Expand the WAR to speed up startup
 - name: Expand WAR file if not already done
   become: true
-  command: |
-    "{{ java_home }}/bin/jar" -xf ../ROOT.war
-  args:
+  ansible.builtin.command:
+    cmd: "{{ java_home }}/bin/jar -xf {{ catalina_base }}/{{ kaui_webapps }}/ROOT.war"
     chdir: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT"
     creates: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT/WEB-INF"
   tags: kaui-logback
