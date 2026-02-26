@@ -84,11 +84,6 @@
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT.war"
   register: root_war
 
-- name: Fail if ROOT.war missing
-  ansible.builtin.fail:
-    msg: "ROOT.war not found at expected location"
-  when: not root_war.stat.exists
-
 # Expand the WAR to speed up startup
 - name: Expand WAR file if not already done
   become: true
