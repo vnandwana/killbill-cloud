@@ -1,40 +1,35 @@
 ---
-- name: Ensure Kaui dirs exist
+- name: ensure Kaui dirs exist
   become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ tomcat_owner }}"
-    group: "{{ tomcat_group }}"
-    mode: u=rwx,g=rx,o=rx
+  file: path={{ item }} state=directory owner={{ tomcat_owner }} group={{ tomcat_group }} mode=u=rwx,g=rx,o=rx
   with_items:
     - "{{ kaui_install_dir }}"
     - "{{ kaui_plugins_dir }}"
   tags: kpm-install
 
-- name: Generate kpm.yml file if needed
+- name: generate kpm.yml file if needed
   become: true
-  ansible.builtin.template:
+  template:
     src: "kaui/kpm.yml.j2"
     dest: "{{ kaui_install_dir }}/kpm.yml"
     mode: u=rw,g=r,o=r
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     # If the file already exist, don't clobber it
-    force: false
+    force: no
   tags: kpm-install
 
 # Generate Kaui-specific Tomcat configuration files based on environment variables
-- name: Generate Tomcat files
+- name: generate Tomcat files
   become: true
-  ansible.builtin.template:
+  template:
     src: "{{ item.src }}/{{ item.name }}.j2"
     dest: "{{ item.dest }}/{{ item.name }}"
     mode: "{{ item.mode }}"
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     # If the files already exist, don't clobber them
-    force: false
+    force: no
   with_items:
     - src: kaui/conf
       name: setenv2.sh
@@ -42,10 +37,10 @@
       dest: "{{ catalina_base }}/bin"
   tags: tomcat
 
-- name: Check if a ROOT webapp is already installed
-  ansible.builtin.stat:
+- name: check if a ROOT webapp is already installed
+  stat:
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT"
-  register: kaui_existing_webapp
+  register: existing_webapp
   tags: tomcat
 
 # Only run kpm install if there is no exploded webapp already. Otherwise,
@@ -53,27 +48,23 @@
 # and always download the war.
 # In practice, this means one cannot just update the version in the kpm.yml file
 # to update Kaui and re-run the role: one needs to first delete the ROOT directory.
-- name: Run KPM install
+- name: run KPM install
   become: true
   become_user: "{{ tomcat_owner }}"
   killbill:
     kpm_path: "{{ kpm_path }}"
     kpm_yml: "{{ kaui_kpm_yml }}"
-  when: not kaui_existing_webapp.stat.exists
+  when: not existing_webapp.stat.exists
   tags: kpm-install
 
-- name: Set correct permissions
+- name: set correct permissions
   become: true
-  ansible.builtin.file:
-    path: "{{ kaui_install_dir }}"
-    owner: "{{ tomcat_owner }}"
-    group: "{{ tomcat_group }}"
-    recurse: true
+  file: path={{ kaui_install_dir }} owner={{ tomcat_owner }} group={{ tomcat_group }} recurse=yes
   tags: kpm-install
 
 - name: Create ROOT directory to unarchive the WAR
   become: true
-  ansible.builtin.file:
+  file:
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT"
     state: directory
     mode: '0755'
@@ -91,7 +82,7 @@
 # Generate logback configuration files based on environment variables
 - name: Copy logback.xml
   become: true
-  ansible.builtin.template:
+  template:
     src: "kaui/{{ item.name }}.j2"
     # Placing the logback.xml on the classpath of the webapp is the only way to support per-webapp configuration
     dest: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT/WEB-INF/classes/logback.xml"
@@ -105,10 +96,10 @@
 
 - name: Recursively change ownership for the expanded ROOT
   become: true
-  ansible.builtin.file:
+  file:
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT"
     state: directory
-    recurse: true
+    recurse: yes
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     mode: u=rwX,g=rX,o=rX
@@ -116,7 +107,7 @@
 
 - name: Remove root archive
   become: true
-  ansible.builtin.file:
+  file:
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT.war"
     state: absent
   tags: kaui-logback
