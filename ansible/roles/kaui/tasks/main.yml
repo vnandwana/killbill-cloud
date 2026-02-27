@@ -79,7 +79,7 @@
     mode: '0755'
 
 # Expand the WAR to speed up startup
-- name: Expand WAR file if not already done
+- name: Expand WAR file if not already done S
   become: true
   command: |
     "{{ java_home }}/bin/jar" -xf ../ROOT.war
