@@ -21,7 +21,7 @@
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     # If the file already exist, don't clobber it
-    force: false
+    force: no
   tags: kpm-install
 
 # Generate Kaui-specific Tomcat configuration files based on environment variables
@@ -34,7 +34,7 @@
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     # If the files already exist, don't clobber them
-    force: false
+    force: no
   with_items:
     - src: kaui/conf
       name: setenv2.sh
@@ -68,7 +68,7 @@
     path: "{{ kaui_install_dir }}"
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
-    recurse: true
+    recurse: yes
   tags: kpm-install
 
 - name: Create ROOT directory to unarchive the WAR
@@ -108,7 +108,7 @@
   ansible.builtin.file:
     path: "{{ catalina_base }}/{{ kaui_webapps }}/ROOT"
     state: directory
-    recurse: true
+    recurse: yes
     owner: "{{ tomcat_owner }}"
     group: "{{ tomcat_group }}"
     mode: u=rwX,g=rX,o=rX

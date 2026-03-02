@@ -129,9 +129,3 @@
     mode: u=rwX,g=rX,o=rX
   tags: killbill-logback
 
-- name: Remove root archive
-  become: true
-  ansible.builtin.file:
-    path: "{{ catalina_base }}/{{ kb_webapps }}/ROOT.war"
-    state: absent
-  tags: killbill-logback
