@@ -59,6 +59,7 @@
   killbill:
     kpm_path: "{{ kpm_path }}"
     kpm_yml: "{{ kaui_kpm_yml }}"
+    kaui_kpm_yml: "{{ kaui_kpm_yml }}"
   when: not kaui_existing_webapp.stat.exists
   tags: kpm-install
 
