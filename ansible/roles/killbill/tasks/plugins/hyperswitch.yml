@@ -62,16 +62,15 @@
   become: true
   become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: >
-    "{{ tomcat_home }}/bin/setup_plugin_ddl.sh
+    {{ tomcat_home }}/bin/setup_plugin_ddl.sh
     hyperswitch
     {{ db_config_address | default('') }}
     {{ db_config_username | default('') }}
     {{ db_config_password | default('') }}
-    {{ db_config_killbill_db_name | default('') }}"
+    {{ db_config_killbill_db_name | default('') }}
   changed_when: false
   when:
     - db_config_address is defined
-  no_log: true
   tags:
     - hyperswitch
     - plugins
