@@ -6,7 +6,7 @@
 - name: Generate plugin ddl setup script
   become: true
   ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/killbill/setup_plugin_ddl.sh.j2"
+    src: "killbill/setup_plugin_ddl.sh.j2"
     dest: "{{ tomcat_home }}/bin/setup_plugin_ddl.sh"
     mode: u=rwx,g=r,o=r
     owner: "{{ tomcat_owner }}"

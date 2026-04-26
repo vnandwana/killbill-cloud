@@ -49,7 +49,7 @@
 - name: Copy Hyperswitch DDL
   ansible.builtin.copy:
     force: true
-    src: killbill/hyperswitch_ddl.sql
+    src: hyperswitch_ddl.sql
     dest: "{{ kb_plugins_dir }}/temp/hyperswitch/hyperswitch_ddl.sql"
     mode: u=rw,g=r,o=r
     owner: "{{ tomcat_owner }}"
