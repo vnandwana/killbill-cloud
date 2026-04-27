@@ -1,7 +1,6 @@
 ---
 - name: Install plugin (kpm) - {{ plugin }}
   become: true
-  become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: >
     "{{ kpm_path }}/kpm" install_java_plugin {{ plugin }}
     --destination={{ kb_plugins_dir }}
@@ -26,7 +25,6 @@
 
 - name: Run DDL
   become: true
-  become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: >
     {{ tomcat_home }}/bin/setup_plugin_ddl.sh
     {{ plugin }}
