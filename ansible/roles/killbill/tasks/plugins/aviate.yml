@@ -17,7 +17,7 @@
 
 - name: Download Aviate plugin jar
   ansible.builtin.get_url:
-    url: "{{ cloudsmith_url_aviate }}/killbill/aviate/maven/com/kill-bill/billing/plugin/java/aviate-plugin-prod/{{ killbill_aviate_version }}/aviate-plugin-{{ killbill_aviate_version }}.jar"
+    url: "{{ cloudsmith_url_aviate }}/killbill/aviate/maven/com/kill-bill/billing/plugin/java/aviate-plugin-prod/{{ killbill_aviate_version }}/aviate-plugin-prod-{{ killbill_aviate_version }}.jar"
     dest: "{{ kb_plugins_dir }}/aviate-plugin-{{ killbill_aviate_version }}.jar"
     mode: "0644"
   tags:
