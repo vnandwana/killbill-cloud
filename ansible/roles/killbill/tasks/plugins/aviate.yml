@@ -26,7 +26,6 @@
 
 - name: Install Aviate plugin
   become: true
-  become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: |
     "{{ kpm_path }}/kpm" install_java_plugin aviate --from-source-file={{ kb_plugins_dir }}/aviate-plugin-{{ killbill_aviate_version }}.jar --destination={{ kb_plugins_dir }}
   args:

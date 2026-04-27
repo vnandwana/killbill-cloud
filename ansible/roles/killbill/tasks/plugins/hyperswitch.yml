@@ -26,7 +26,6 @@
 
 - name: Install Hyperswitch plugin
   become: true
-  become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: |
     "{{ kpm_path }}/kpm" install_java_plugin hyperswitch --from-source-file={{ kb_plugins_dir }}/hyperswitch-killbill-plugin-{{ killbill_hyperswitch_version }}.jar --destination={{ kb_plugins_dir }}
   args:
@@ -60,7 +59,6 @@
 
 - name: Setup Hyperswitch DDL # noqa no-changed-when
   become: true
-  become_user: "{{ tomcat_owner }}"
   ansible.builtin.command: >
     {{ tomcat_home }}/bin/setup_plugin_ddl.sh
     hyperswitch
