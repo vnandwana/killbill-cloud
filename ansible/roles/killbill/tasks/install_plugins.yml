@@ -23,3 +23,13 @@
 
 - name: Load Aviate plugin tasks
   ansible.builtin.include_tasks: plugins/aviate.yml
+
+- name: Install Braintree plugin
+  become: true
+  ansible.builtin.command: |
+    "{{ kpm_path }}/kpm" install_java_plugin braintree --destination={{ kb_plugins_dir }}
+  args:
+    creates: "{{ kb_plugins_dir }}/plugins/java/braintree-plugin"
+  tags:
+    - hyperswitch
+    - plugins
