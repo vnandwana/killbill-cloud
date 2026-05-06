@@ -9,5 +9,7 @@ COPY ./kpm.yml $KILLBILL_INSTALL_DIR
 # Run both the main playbook and the one enabling structured logging
 RUN $KPM_INSTALL_CMD $KILLBILL_CLOUD_ANSIBLE_ROLES/killbill_json_logging.yml
 
+RUN $INSTALL_PLUGINS_CMD
+
 # Override start script (no need for Ansible scripts to be run)
 COPY ./killbill.sh $KILLBILL_INSTALL_DIR

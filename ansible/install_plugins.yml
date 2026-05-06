@@ -3,4 +3,4 @@
   hosts: all
   tasks:
     - name: Install plugins
-      import_tasks: roles/common/tasks/install_plugins.yml
+      import_tasks: roles/killbill/tasks/install_plugins.yml

@@ -31,5 +31,5 @@
   args:
     creates: "{{ kb_plugins_dir }}/plugins/java/braintree-plugin"
   tags:
-    - hyperswitch
+    - braintree
     - plugins
