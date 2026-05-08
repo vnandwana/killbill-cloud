@@ -1,7 +1,7 @@
 ---
 - name: Load KPM plugins to install
   ansible.builtin.include_vars:
-    file: kpm_plugins.yml
+    file: "{{ role_path }}/vars/kpm_plugins.yml"
 
 - name: Generate plugin ddl setup script
   become: true
