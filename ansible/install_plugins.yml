@@ -3,4 +3,6 @@
   hosts: all
   tasks:
     - name: Install plugins
-      import_tasks: roles/killbill/tasks/install_plugins.yml
+      ansible.builtin.include_role:
+        name: killbill
+        tasks_from: install_plugins
