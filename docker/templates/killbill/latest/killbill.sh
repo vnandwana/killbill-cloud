@@ -9,6 +9,12 @@ echo "STARTING INSTALL_PLUGINS_CMD"
 $KPM_INSTALL_CMD $KILLBILL_CLOUD_ANSIBLE_ROLES/killbill_json_logging.yml
 
 echo "STARTING INSTALL_PLUGINS_CMD..."
+
+until mysql --protocol=TCP -h127.0.0.1 -P3306 -uroot -pkillbill -e "SELECT 1"; do
+  echo "Waiting for MariaDB..."
+  sleep 5
+done
+
 echo "$INSTALL_PLUGINS_CMD"
 
 $INSTALL_PLUGINS_CMD
