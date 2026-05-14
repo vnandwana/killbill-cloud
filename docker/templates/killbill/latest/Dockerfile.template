@@ -69,11 +69,6 @@ ENV INSTALL_PLUGINS_CMD="ansible-playbook $ANSIBLE_OPTS  \
                                       -e tomcat_owner=$TOMCAT_OWNER \
                                       -e tomcat_group=$TOMCAT_GROUP \
                                       -e catalina_base=$CATALINA_BASE \
-                                      -e db_config_address=127.0.0.1 \
-                                      -e db_config_port=3306 \
-                                      -e db_config_username=$KILLBILL_DAO_USER \
-                                      -e db_config_password=$KILLBILL_DAO_PASSWORD \
-                                      -e db_config_killbill_db_name=killbill \
                                       -e kb_system_properties=-Dcom.killbill.license=$KILLBILL_INSTALL_DIR/config/aws.out \
                                       $KILLBILL_CLOUD_ANSIBLE_ROLES/install_plugins.yml"
 
