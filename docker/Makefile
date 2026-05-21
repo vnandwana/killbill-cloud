@@ -23,7 +23,7 @@ all: build
 build:
 	@echo "Building image $(IMAGE) for version $(VERSION) from template $(TEMPLATE) with parent $(PARENT_VERSION)"
 	$(DOCKER_TEMPLATE) -p $(PARENT_VERSION) -v $(VERSION) -t $(TARGET) -i
-	$(DOCKER) build --no-cache -t $(IMAGE) $(TEMPLATE)
+	$(DOCKER) build -t $(IMAGE) $(TEMPLATE)
 	$(DOCKER_TEMPLATE) -t $(TARGET) -c
 
 rebuild:
