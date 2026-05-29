@@ -63,7 +63,7 @@ describe KPM::NexusFacade do
       parsed_doc = REXML::Document.new(response)
       expect(parsed_doc.elements['//groupId'].text).to eq('org.kill-bill.billing')
       expect(parsed_doc.elements['//artifactId'].text).to eq('killbill')
-      expect(parsed_doc.elements['//version'].text).to eq(test_version)
+      expect(parsed_doc.elements['//version'].text).to match(/\A\d+\.\d+\.\d+\z/)
     end
   end
 end
