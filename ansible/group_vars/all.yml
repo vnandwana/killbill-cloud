@@ -20,9 +20,6 @@ kaui_webapps: webapps
 
 tomcat_foreground: false
 
-cloudsmith_token_aviate: kd355k1mdx5IL8TU
-cloudsmith_url_aviate: "https://dl.cloudsmith.io/{{ cloudsmith_token_aviate }}"
-
 # Base directory for namespacing
 kb_install_dir: /var/lib/killbill
 # Configuration files (killbill.properties, JRuby files, etc.)
