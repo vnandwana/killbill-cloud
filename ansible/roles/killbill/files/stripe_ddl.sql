@@ -17,6 +17,7 @@
 
 /*! SET default_storage_engine=INNODB */;
 
+DROP table If exists stripe_hpp_requests;
 create table stripe_hpp_requests (
   record_id serial
 , kb_account_id char(36) not null
@@ -32,6 +33,7 @@ create index stripe_hpp_requests_kb_account_id on stripe_hpp_requests(kb_account
 create unique index stripe_hpp_requests_kb_session_id on stripe_hpp_requests(session_id);
 create index stripe_hpp_requests_kb_payment_transaction_id on stripe_hpp_requests(kb_payment_transaction_id);
 
+DROP table If exists stripe_responses;
 create table stripe_responses (
   record_id serial
 , kb_account_id char(36) not null
@@ -50,6 +52,7 @@ create index stripe_responses_kb_payment_id on stripe_responses(kb_payment_id);
 create index stripe_responses_kb_payment_transaction_id on stripe_responses(kb_payment_transaction_id);
 create index stripe_responses_stripe_id on stripe_responses(stripe_id);
 
+DROP table If exists stripe_payment_methods;
 create table stripe_payment_methods (
   record_id serial
 , kb_account_id char(36) not null

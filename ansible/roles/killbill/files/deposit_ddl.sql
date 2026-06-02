@@ -17,6 +17,7 @@
 
 /*! SET default_storage_engine=INNODB */;
 
+DROP table If exists deposit_responses;
 create table deposit_responses (
   record_id serial
 , kb_account_id char(36) not null
@@ -37,6 +38,7 @@ create index deposit_responses_kb_payment_id on deposit_responses(kb_payment_id)
 create index deposit_responses_kb_payment_transaction_id on deposit_responses(kb_payment_transaction_id);
 create index deposit_responses_deposit_reference_number on deposit_responses(deposit_reference_number);
 
+DROP table If exists deposit_payment_methods;
 create table deposit_payment_methods (
   record_id serial
 , kb_account_id char(36) not null
