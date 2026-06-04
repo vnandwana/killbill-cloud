@@ -1,0 +1,8 @@
+---
+- name: Install Plugins
+  hosts: all
+  tasks:
+    - name: Install plugins
+      ansible.builtin.include_role:
+        name: killbill
+        tasks_from: install_plugins

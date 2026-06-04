@@ -1,0 +1,6 @@
+killbill_kpm_plugins:
+  - adyen
+  - analytics
+  - deposit
+  - email-notifications
+  - stripe
