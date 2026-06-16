@@ -23,7 +23,6 @@ COPY ./kpm.yml $KILLBILL_INSTALL_DIR
 COPY ./setenv2.sh $CATALINA_BASE/bin
 COPY ./killbill.sh $KILLBILL_INSTALL_DIR
 COPY ./shiro.ini.template $KILLBILL_INSTALL_DIR/config
-COPY ./install_plugins.yml $KILLBILL_CLOUD_ANSIBLE_ROLES
 
 ENV KPM_INSTALL_CMD="ansible-playbook $ANSIBLE_OPTS  \
                                       -e kpm_install_dir=$KPM_INSTALL_DIR \
