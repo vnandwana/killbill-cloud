@@ -1,8 +1,12 @@
 ---
+- name: Load Aviate variables
+  ansible.builtin.include_vars:
+    file: {{ kb_install_dir }}/aviate-vars.yml
+
 - name: Install Aviate plugin
   become: true
   ansible.builtin.command: |
-    "{{ kpm_path }}/kpm" install_java_plugin aviate --from-source-file={{ kb_plugins_dir }}/aviate-plugin.jar --destination={{ kb_plugins_dir }}
+    "{{ kpm_path }}/kpm" install_java_plugin aviate --from-source-file={{ kb_plugins_dir }}/aviate-plugin-{{ killbill_aviate_version }}.jar --destination={{ kb_plugins_dir }}
   args:
     creates: "{{ kb_plugins_dir }}/plugins/java/aviate-plugin"
   tags:
