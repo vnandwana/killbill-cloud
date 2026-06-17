@@ -1,7 +1,7 @@
 ---
 - name: Load Aviate variables
   ansible.builtin.include_vars:
-    file: {{ kb_install_dir }}/aviate-vars.yml
+    file: "{{ kb_install_dir }}/aviate-vars.yml"
 
 - name: Install Aviate plugin
   become: true
