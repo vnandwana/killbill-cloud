@@ -4,12 +4,12 @@
     paths: "{{ kb_plugins_dir }}"
     patterns: "aviate-plugin-*.jar"
     file_type: file
-  register: aviate_plugin
+  register: killbill_aviate_plugin
 
 - name: Install Aviate plugin
   become: true
   ansible.builtin.command: |
-    "{{ kpm_path }}/kpm" install_java_plugin aviate --from-source-file={{ aviate_plugin.files[0].path }} --destination={{ kb_plugins_dir }}
+    "{{ kpm_path }}/kpm" install_java_plugin aviate --from-source-file={{ killbill_aviate_plugin.files[0].path }} --destination={{ kb_plugins_dir }}
   args:
     creates: "{{ kb_plugins_dir }}/plugins/java/aviate-plugin"
   tags:
