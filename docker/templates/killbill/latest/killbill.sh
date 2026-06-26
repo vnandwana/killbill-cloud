@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 echo "Installing plugins..."
 
@@ -18,6 +18,8 @@ INSTALL_PLUGINS_CMD="$INSTALL_PLUGINS_CMD \
   -e db_config_username=$KILLBILL_DAO_USER \
   -e db_config_password=$KILLBILL_DAO_PASSWORD \
   -e db_config_killbill_db_name=killbill"
+
+eval "$INSTALL_PLUGINS_CMD"
 
 originalfile=$KILLBILL_INSTALL_DIR/config/shiro.ini.template
 cat $originalfile | envsubst '${KB_ADMIN_PASSWORD}' > $KILLBILL_INSTALL_DIR/config/shiro.ini

@@ -35,7 +35,13 @@ module KPM
         url = "#{SEARCH_API}?#{query}"
 
         response = Net::HTTP.get_response(URI(url))
-        raise "Search failed: #{response.code}" unless response.code.to_i == 200
+
+        unless response.code.to_i == 200
+          puts "Search URL: #{url}"
+          puts "Response Code: #{response.code}"
+          puts "Response Body: #{response.body}"
+          raise "Search failed: #{response.code}"
+        end
 
         json = JSON.parse(response.body)
         docs = json['response']['docs']
