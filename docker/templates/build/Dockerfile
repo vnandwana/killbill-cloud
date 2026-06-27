@@ -34,7 +34,6 @@ RUN apt-get update && \
       python3-lxml \
       software-properties-common \
       sudo \
-      telnet \
       unzip \
       zip \
       vim && \

@@ -26,7 +26,6 @@ RUN apt-get update && \
       openjdk-11-jdk-headless \
       python3-lxml \
       sudo \
-      telnet \
       unzip \
       # A bit large unfortunately (https://bugs.launchpad.net/ubuntu/+source/vim/+bug/1884583)
       vim && \
