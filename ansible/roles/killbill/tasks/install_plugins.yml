@@ -18,8 +18,8 @@
   loop_control:
     loop_var: plugin
 
-- name: Load Hyperswitch plugin tasks
-  ansible.builtin.include_tasks: plugins/hyperswitch.yml
+#- name: Load Hyperswitch plugin tasks
+#  ansible.builtin.include_tasks: plugins/hyperswitch.yml
 
 - name: Load Aviate plugin tasks
   ansible.builtin.include_tasks: plugins/aviate.yml
