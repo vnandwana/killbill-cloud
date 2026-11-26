@@ -1,11 +1,11 @@
 ---
-- name: Install plugin (kpm) - {{ plugin }}
-  become: true
-  ansible.builtin.command: >
-    "{{ kpm_path }}/kpm" install_java_plugin {{ plugin }}
-    --destination={{ kb_plugins_dir }}
-  args:
-    creates: "{{ kb_plugins_dir }}/plugins/java/{{ plugin }}-plugin"
+#- name: Install plugin (kpm) - {{ plugin }}
+#  become: true
+#  ansible.builtin.command: >
+#    "{{ kpm_path }}/kpm" install_java_plugin {{ plugin }}
+#    --destination={{ kb_plugins_dir }}
+#  args:
+#    creates: "{{ kb_plugins_dir }}/plugins/java/{{ plugin }}-plugin"
 
 - name: Ensure temp directory exists
   ansible.builtin.file:
